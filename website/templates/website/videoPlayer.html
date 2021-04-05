@@ -1,13 +1,13 @@
+{% load static %}
+<style>
+    @import url({% static 'website/player.css' %});
+    @import url({% static 'website/buttons.css' %});
+</style>
 
 <div class="iframeContainer" id="player">
 </div>
 
-
-
-<div class="buttonContainer">
-{#    <button class="big-button" onclick="location.href='/funny/{{ prev_video_item_id }}'">Prev</button>#}
-{#    <button class="big-button" onclick="location.href='/funny/{{ next_video_item_id }}'">Next</button>#}
-{#    <button id="pauseplay" class="button">Pause/Play</button>#}
+<div id="buttons" class="buttonContainer">
     <div class="buttonwrapperPrev">
         <a class="ctaPrev cta" href="#">
             <span>PREV</span>
@@ -17,7 +17,7 @@
             </span>
         </a>
     </div>
-        <div class="buttonwrapperNext">
+        <div class="buttonwrapperNext" id="nextButton" onclick="nextVideo()">
           <a class="ctaNext cta" href="#">
             <span>NEXT</span>
             <span>
@@ -32,21 +32,11 @@
           </a>
         </div>
 </div>
-<script>
-    var $btn = document.querySelector('.btn');
 
-    $btn.addEventListener('click', e => {
-      window.requestAnimationFrame(() => {
-        $btn.classList.remove('is-animating');
-
-        window.requestAnimationFrame(() => {
-          $btn.classList.add('is-animating');
-        });
-      });
-    });
-</script>
 <script>
-      // 2. This code loads the IFrame Player API code asynchronously.
+      var currentVideoId;
+
+    // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
 
       tag.src = "https://www.youtube.com/iframe_api";
@@ -65,6 +55,7 @@
                 //'onStateChange': onPlayerStateChange
               }
         })
+          currentVideoId = {{ video_item.id }};
       };
 
 
@@ -81,5 +72,16 @@
       //    the player should play for six seconds and then stop.
       function stopVideo() {
           player.stopVideo();
-      }
+      };
+
+
+      function nextVideo() {
+          //$('#videoPlayer').addClass('animate__animated animate__backOutDown').delay(1000);
+          $.get("/funny/next/" + currentVideoId, function (data) {
+              jsondata = JSON.parse(data)[0];
+              player.loadVideoById(jsondata.fields.video_url);
+              currentVideoId = jsondata.pk;
+          });
+      };
+
     </script>

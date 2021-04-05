@@ -1,50 +1,15 @@
-body {
-  background-color: #FEF4AD;
-}
-.videoContainer {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.iframeContainer{
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0.8;  /* for demo purpose  */
-}
-
 .buttonContainer{
   position: absolute;
   bottom: 40px;
   width: 100%;
   z-index: 9;
-  text-align: right;
   margin: 20px; /* for demo purpose  */
 }
 
-div a{
+
+.buttonContainer div{
     display:inline-block;
 }
-
-iframe {
-  /* optional */
-  width: 100%;
-  height: 100%;
-}
-
-/*for buttons*/
-
 @import url('https://fonts.googleapis.com/css?family=Poppins:900i');
 
 * {
@@ -55,9 +20,9 @@ iframe {
   display: flex;
   /*justify-content: center;*/
   position: absolute;
-  right: 2%;
-  bottom: 8%;
   opacity: 0.5;
+    right: 5%;
+    bottom: 10%;
 }
 
 .buttonwrapperNext:hover {
@@ -68,9 +33,9 @@ iframe {
   display: flex;
   /*justify-content: center;*/
   position: absolute;
-  left: 2%;
-  bottom: 8%;
   opacity: 0.5;
+    left: 5%;
+    bottom: 10%;
 }
 
 .buttonwrapperPrev:hover {

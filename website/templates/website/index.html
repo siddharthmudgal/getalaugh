@@ -3,15 +3,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ video_item.video_name }}</title>
+    <title>LOL</title>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link id="stylepage" rel="stylesheet" href="{% static 'website/style.css' %}" disabled="true">
-    <link rel="stylesheet" href="{% static 'website/styletwo.css' %}" id="splashstyle">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <link rel="stylesheet" href="{% static 'website/splash.css' %}" id="splashStyle">
 </head>
 <body>
     <div id="videoPlayer" class="videoContainer" style="visibility: hidden">
-        {% include 'website/videoPlayer.html' %}
     </div>
     <div>
         {% include 'website/splash.html' %}
@@ -19,6 +19,7 @@
   </div>
 
     <script>
+
         $( document ).ready(function() {
             document.body.onkeyup = function(e){
                 if(e.keyCode == 32){
@@ -28,11 +29,19 @@
         });
 
         function pcsh1(){
+            //animate splash exit
             $('#pc1').addClass('animate__animated animate__backOutDown').delay(1000).queue(function(next){
+
+                //remove splash
                 $('#pc1').remove();
-                $('#splashstyle').attr('disabled','disabled');
-                $('#stylepage').removeAttr('disabled');
+                //disable splash css
+                $('#splashStyle').attr('disabled','disabled');
+
+                //load html player
+                $('#videoPlayer').load("/funny/{{ video_id }}/")
+                //make player div visible
                 $('#videoPlayer').css("visibility","visible");
+                //add player animation
                 $('#videoPlayer').addClass('animate__animated animate__backInDown');
             });;
 

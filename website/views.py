@@ -1,35 +1,40 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.core import serializers
 
 # Create your views here.
 from website.models import Video
 
-
-#landing page
-def homePage(request):
-    video_list = Video.objects.all()
+def index(request):
+    video_id = 1
     context = {
-        'video_list':video_list,
+        'video_id': video_id,
     }
+    return render(request, 'website/index.html', context)
 
-    return render(request, 'website/homepage.html',context)
+def getVideoID(request, action, video_id):
+    count = Video.objects.count()
+
+    if action == 'next':
+        if video_id >= count:
+            video_id = 1
+        else:
+            video_id = video_id + 1
+
+    elif action == 'prev':
+        if video_id <= 1:
+            video_id = count
+        else:
+            video_id = video_id - 1;
+
+    video_item = Video.objects.get(pk=video_id)
+
+    return HttpResponse(serializers.serialize('json', [ video_item, ]))
 
 def playvideo(request, video_id):
     video_item = Video.objects.get(pk=video_id)
-    count = Video.objects.count()
-    if video_id > 1:
-        prev_video_item_id = video_id-1
-    else:
-        prev_video_item_id = count
-
-    if video_id == count:
-        next_video_item_id = 1
-    else:
-        next_video_item_id = video_id+1
 
     context = {
         'video_item': video_item,
-        'prev_video_item_id': prev_video_item_id,
-        'next_video_item_id': next_video_item_id,
     }
-    return render(request, 'website/playvideo.html', context)
+    return render(request, 'website/videoPlayer.html', context)

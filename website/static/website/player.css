@@ -1,0 +1,31 @@
+body {
+  background-color: #FEF4AD;
+}
+.videoContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.iframeContainer{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;  /* for demo purpose  */
+}
+
+iframe {
+  /* optional */
+  width: 100%;
+  height: 100%;
+}

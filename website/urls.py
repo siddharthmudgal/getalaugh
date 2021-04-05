@@ -3,6 +3,7 @@ from django.urls import path, include
 from website import views
 
 urlpatterns = [
-    #path('', views.homePage, name='homePage'),
-    path('<int:video_id>/', views.playvideo, name='videoDetail')
+    path('', views.index, name='index'),
+    path('<str:action>/<int:video_id>', views.getVideoID, name='getVideoID'),
+    path('<int:video_id>/', views.playvideo, name='playvideo'),
 ]
